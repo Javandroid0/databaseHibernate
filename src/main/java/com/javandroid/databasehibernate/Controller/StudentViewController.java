@@ -16,7 +16,7 @@ public class StudentViewController {
     }
 
     @GetMapping
-    public String student(Model model) {
+    public String studentList(Model model) {
         model.addAttribute("students", studentService.findAll());
         return "students";
     }
@@ -35,8 +35,12 @@ public class StudentViewController {
 
     @GetMapping("/edit/{id}")
     public String showEditStudentForm(@PathVariable Long id, Model model) {
-        model.addAttribute("student", studentService.findById(id));
-        return "student_form";
+        Student student = studentService.findById(id);
+        if (student != null) {
+            model.addAttribute("student", student);
+            return "student_form";
+        }
+        return "redirect:/students";
     }
 
     @GetMapping("/delete/{id}")

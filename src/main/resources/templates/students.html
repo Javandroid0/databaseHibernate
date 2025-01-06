@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <title>Student List</title>
 </head>
@@ -23,8 +23,9 @@
         <td th:text="${student.lastName}"></td>
         <td th:text="${student.email}"></td>
         <td>
-            <a th:href="@{/students/edit/{id}(id=${student.id})}">Edit</a>
-            <a th:href="@{/students/delete/{id}(id=${student.id})}">Delete</a>
+            <a th:href="@{'/students/edit/' + ${student.id}}">Edit</a>
+            <a th:href="@{'/students/delete/' + ${student.id}}"
+               onclick="return confirm('Are you sure you want to delete this student?');">Delete</a>
         </td>
     </tr>
     </tbody>

@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api/students")
 public class StudentController {
     private final StudentService studentService;
-
 
     public StudentController(StudentService studentService) {
         this.studentService = studentService;
@@ -29,8 +28,9 @@ public class StudentController {
     }
 
     @PostMapping
-    public Student createStudent(@RequestBody Student student) {
-        return studentService.save(student);
+    public ResponseEntity<Student> createStudent(@RequestBody Student student) {
+        Student createdStudent = studentService.save(student);
+        return ResponseEntity.status(201).body(createdStudent);
     }
 
     @PutMapping("/{id}")
